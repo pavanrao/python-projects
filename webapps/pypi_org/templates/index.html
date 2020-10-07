@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Python Package Index (demo)</title>
+    </head>
+    <body>
+
+        <style>
+            .title {
+                font-weight: bold;
+            }
+        </style>
+
+        <h1>Python Package Index</h1>
+        <h2>Packages</h2>
+        {% for p in packages %}
+            <div>
+                <span class="title">
+                    {{p.name}}
+                </span>
+                <span>
+                    {{p.version}}
+                </span>
+            </div>
+        {% endfor %}
+    </body>
+</html>
