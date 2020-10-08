@@ -1,25 +1,28 @@
+import os
+import sys
 import flask
+folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, folder)
+
+from pypi_org.infrastructure.view_modifiers import response
+
+import pypi_org.services.package_service as package_service
 
 app = flask.Flask(__name__)
 
-
-def get_latest_packages():
-    return[
-        {'name': 'flask', 'version': '1.2.3'},
-        {'name': 'sqlalchemy', 'version': '3.2.3'},
-        {'name': 'passlib', 'version': '2.2.3'},
-    ]
-
-
 @app.route('/')
+@response(template_file='home/index.html')
 def index():
-    test_packages = get_latest_packages()
-    return flask.render_template('index.html', packages=test_packages)
+    test_packages = package_service.get_latest_packages()
+    return {'packages' : test_packages} 
+    # return flask.render_template('home/index.html', packages=test_packages)
 
 
 @app.route('/about')
+@response(template_file='home/about.html')
 def about():
-    return flask.render_template('about.html')
+    return {}
+    # return flask.render_template('home/about.html')
 
 
 if __name__ == "__main__":
